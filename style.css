@@ -108,6 +108,7 @@ h1{
 
 #image:active{
     scale: 0.98;
+    filter: brightness(0.7);
 }
 
 #image img{
