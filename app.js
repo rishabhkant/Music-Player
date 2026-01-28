@@ -71,6 +71,10 @@ const disc = document.getElementById('disc');
 const cards = document.getElementsByClassName('card');
 let allCards = [...cards];
 
+let currentGenreSongs = [];
+
+
+
 checkBox.addEventListener('click' , ()=>{
     toggleTheme();
     
@@ -94,9 +98,9 @@ songsData.forEach((e)=>{
     genres.push(e.genre);
 })
 
-console.log(genres);
+// console.log(genres);
 const allGenres = [...new Set(genres)];
-console.log(allGenres);
+// console.log(allGenres);
 
 
 function showGenres(){
@@ -109,9 +113,24 @@ function showGenres(){
 }
 showGenres();
 
+function showSongs(){
+    currentGenreSongs = [];
+    songsData.forEach((e)=>{
+        const songList = document.createElement("div")
+        songList.classList.add('songNames');
+        songList.textContent =  e.name;
+        songList.dataset.id = e.id;
+        songLists.appendChild(songList);
+        currentGenreSongs.push(e);
+    })
+}
+showSongs();
+console.log(currentGenreSongs);
+
 
 genreList.addEventListener('change', ()=>{
         songLists.textContent = '';
+        currentGenreSongs = [];
         if(genreList.value === "all"){
             showSongs();
         }else{
@@ -123,22 +142,11 @@ genreList.addEventListener('change', ()=>{
             songList.textContent =  e.name;
             songList.dataset.id = e.id;
             songLists.appendChild(songList);
+            currentGenreSongs.push(e);
         })
     }
-    
+    console.log(currentGenreSongs);
 })
-
-
-function showSongs(){
-    songsData.forEach((e)=>{
-        const songList = document.createElement("div")
-        songList.classList.add('songNames');
-        songList.textContent =  e.name;
-        songList.dataset.id = e.id;
-        songLists.appendChild(songList);
-    })
-}
-showSongs()
 
 
 songLists.addEventListener('click' , (event)=>{
@@ -148,7 +156,7 @@ songLists.addEventListener('click' , (event)=>{
         if(event.target.classList.contains('songNames')){
             const currId = event.target.dataset.id;
             const currObj = songsData.find((e)=> e.id === Number(currId));
-            renderCurrentSong(currObj)
+            renderCurrentSong(currObj);
             currentSongInfo(currObj);
         }
 })
@@ -165,7 +173,11 @@ function renderCurrentSong(object){
         audioBlock.load();
         audioBlock.controls = true;
         audioBlock.play();
-        playPause(audioBlock);
+}
+
+
+function addToPlaylist(){
+
 }
 
 
