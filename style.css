@@ -98,6 +98,16 @@ h1{
 
 #image{
     width: 80%;
+    transition: all 0.1s ease-in-out;
+}
+
+#image:hover{
+    cursor: pointer;
+    filter: brightness(0.7);
+}
+
+#image:active{
+    scale: 0.98;
 }
 
 #image img{
@@ -165,6 +175,7 @@ h1{
 .songNames:hover{
     background-color: rgba(121, 121, 121, 0.185);
     scale: 101%;
+    cursor: pointer;
 }
 
 .songNamesList{
