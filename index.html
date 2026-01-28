@@ -3,9 +3,101 @@
 <head>
     <meta charset="UTF-8">
     <meta name="viewport" content="width=device-width, initial-scale=1.0">
-    <title>Document</title>
+    <title>Music Player</title>
+    <link rel="stylesheet" href="style.css">
+    <link rel="preconnect" href="https://fonts.googleapis.com">
+    <link rel="preconnect" href="https://fonts.gstatic.com" crossorigin>
+    <link href="https://fonts.googleapis.com/css2?family=Roboto:ital,wght@0,100..900;1,100..900&display=swap" rel="stylesheet">
+    <script defer src="app.js"></script>
 </head>
 <body>
-    
+
+
+        <h1>Music Player</h1>
+        <div class="container">
+            <section class="card allSongs">
+                <div class="genreFilter">
+                    <p>Filter by Genre</p>
+                    <select name="genre" id="genre">
+                        <option value="all" selected >All</option>
+                        <option value="pop">Pop</option>
+                        <option value="jazz">Jazz</option>
+                        <option value="disco">Disco</option>
+                        <option value="hiphop">Hip Hop</option>
+                    </select>
+                </div>
+
+                <h2>All Songs</h2>
+                <div id="songList">
+                    <!-- <div class="songNames">Funky Town</div> -->
+                </div>
+            </section>
+
+
+
+            <section class="card songCard">
+                <div class="imageContainer">
+                    <div id="image">
+                        <img src="FunkyTown.png" alt="" class="shadow">
+                    </div>
+                    <div id="songLink">
+                        <audio src="Funkytown (made popular by Lipps Inc.) [vocal version] - Party Tyme.mp3" class="shadow" controls></audio>
+                        
+                    </div>
+                    <div class="singer"></div>
+                </div>
+
+                <div class="song"></div>
+
+
+                <!-- <div class="progressBar">
+                    <img class="prog" src="prog.png" alt="">
+                    <div class="bar"></div>
+                </div> -->
+
+                <div class="btns">
+                    <button id="prev" class="controlBtn shadow">Prev</button>
+                    <button id="add"  class="controlBtn shadow">Add to Playlist</button>
+                    <button id="next" class="controlBtn shadow">Next</button>
+                </div>
+                
+            </section>
+
+
+
+            <section class="card playlist">
+                <div class="playlistName">
+                    <input type="text" id="playlist" placeholder="Enter Playlist Name">
+                    <button class="createPlaylist">CreatePlaylist</button>
+                </div>
+                
+                <div class="playlistsContainer">
+                    <div id="currentPlaylist">
+                        <h3>Current PlayList:</h3>
+                        <div class="songNamesList">Funky Town</div>
+                    </div>
+                    
+                    <div id="allPlaylist">
+                        <h3>All PlayLists:</h3>
+                        <div class="songNamesList">Funky Town</div>
+
+
+                    </div>
+                </div>
+            </section>
+
+
+
+
+            <section class="toggle">
+                <label class="switch" id="toggleBtn">
+                <input type="checkbox" id="checkBox">
+                <span class="slider"></span>
+                </label>
+            </section>
+            <img class="disc" id="disc" src="wqeqw1.png" alt="">
+        </div>
+
+     
 </body>
 </html>
