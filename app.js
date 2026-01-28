@@ -35,7 +35,7 @@ const songsData = [
         source: 'https://www.dropbox.com/scl/fi/hau33iau7e0ijopwu3ecr/Funkytown-made-popular-by-Lipps-Inc.-vocal-version-Party-Tyme.mp3?rlkey=ezc5u9c1h1oupqurqlxhaz92e&st=11tc22im&dl=1',
     },
     {   id: 6,
-        name : "La Iska Bonita",
+        name : "La Isla Bonita",
         arist : "Madonna",
         img: 'https://www.dropbox.com/scl/fi/nvkpgnomg2k0i7qprx30n/La-Isla-Bonita.png?rlkey=ocp7syvqrg0zr251znu7b41z6&st=rltrvau8&dl=1' ,
         genre: 'Pop',
@@ -43,10 +43,12 @@ const songsData = [
     }
 ]
 
-const songLists = document.getElementById('songList');
+const songLists = document.getElementById('songLists');
 const imageEl = document.getElementById('image');
 const songPlay = document.getElementById('songLink');
 const genreList = document.getElementById('genre');
+const singer = document.getElementById('singer');
+const song = document.getElementById('song');
 
 const audioBlock = document.getElementById('audioBlock');
 
@@ -58,13 +60,23 @@ const ctrlBtn = [...buttons];
 const checkBox = document.getElementById('checkBox');
 const toggleBtn = document.getElementById('toggleBtn');
 
+
+const prevBtn = document.getElementById('prev');
+const nextBtn = document.getElementById('next');
+const addBtn = document.getElementById('add');
+
+
 const disc = document.getElementById('disc');
 
 const cards = document.getElementsByClassName('card');
 let allCards = [...cards];
 
 checkBox.addEventListener('click' , ()=>{
+    toggleTheme();
     
+})
+
+function toggleTheme(){
     if(checkBox.checked){
         disc.classList.toggle('active');
         document.body.style.color = "white";
@@ -74,7 +86,7 @@ checkBox.addEventListener('click' , ()=>{
         document.body.style.color = "black";
 
     }
-})
+}
 
 
 let genres = [];
@@ -99,15 +111,21 @@ showGenres();
 
 
 genreList.addEventListener('change', ()=>{
-    const genress = songsData.filter(e => e.genre === genreList.value);
-    songLists.textContent = '';
-    genress.forEach((e)=>{
-        const songList = document.createElement("div")
-        songList.classList.add('songNames');
-        songList.textContent =  e.name;
-        songList.dataset.id = e.id;
-        songLists.appendChild(songList);
-    })
+        songLists.textContent = '';
+        if(genreList.value === "all"){
+            showSongs();
+        }else{
+        const genress = songsData.filter(e => e.genre === genreList.value);
+        
+        genress.forEach((e)=>{
+            const songList = document.createElement("div")
+            songList.classList.add('songNames');
+            songList.textContent =  e.name;
+            songList.dataset.id = e.id;
+            songLists.appendChild(songList);
+        })
+    }
+    
 })
 
 
@@ -120,26 +138,36 @@ function showSongs(){
         songLists.appendChild(songList);
     })
 }
-showSongs();
+showSongs()
 
 
 songLists.addEventListener('click' , (event)=>{
         imageEl.textContent = '';
+        singer.textContent = '';
+        song.textContent = '';
         if(event.target.classList.contains('songNames')){
             const currId = event.target.dataset.id;
             const currObj = songsData.find((e)=> e.id === Number(currId));
-
-            const tempImg = document.createElement('img');
-            tempImg.src = currObj.img;
-            imageEl.appendChild(tempImg);
-
-            audioBlock.src = currObj.source;
-            audioBlock.load();
-            audioBlock.controls = true;
-            audioBlock.play();
-            playPause(audioBlock);
+            renderCurrentSong(currObj)
+            currentSongInfo(currObj);
         }
 })
+
+function renderCurrentSong(object){
+        const tempImg = document.createElement('img');
+        tempImg.src = object.img;
+        imageEl.appendChild(tempImg);
+
+        singer.textContent = object.arist;
+        song.textContent = object.name;
+
+        audioBlock.src = object.source;
+        audioBlock.load();
+        audioBlock.controls = true;
+        audioBlock.play();
+        playPause(audioBlock);
+}
+
 
 
 imageEl.addEventListener('click', ()=>{
@@ -148,5 +176,8 @@ imageEl.addEventListener('click', ()=>{
     }else{
         audioBlock.pause();
     }
-})
+});
+
+
+
 
