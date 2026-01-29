@@ -16,8 +16,11 @@
         <div><h1>Music Player</h1></div>
         <div class="container">
             <section class="card allSongs">
+                
                 <div class="genreFilter">
-                    <p>Filter by Genre</p>
+                    <!-- <p>Filter by Genre</p> -->
+                    <input type="text" id="songSearch" class="playlist" placeholder="Enter Song Name">
+                    <button id="searchBtn">Go</button>
                     <select name="genre" id="genre">
                         <option value="all" selected >All</option>
                     </select>
@@ -72,7 +75,11 @@
                 <div class="playlistsContainer">
                     <div id="currentPlay">
                         <div id="currentPlaylistDiv"><h3>Current PlayList:</h3></div>
-                        <div id="currentPlaylist"></div>
+                        <div id="currentPlaylist">
+                            <!-- <div class="songNames">Funky Town 
+                                <button class="deleteBtn">x</button>
+                            </div> -->
+                        </div>
                     </div>
                     
                     <div id="allPlaylistDiv">
@@ -88,6 +95,7 @@
 
 
             <section class="toggle">
+                
                 <label class="switch" id="toggleBtn">
                 <input type="checkbox" id="checkBox">
                 <span class="slider"></span>
