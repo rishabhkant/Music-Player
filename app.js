@@ -113,6 +113,11 @@ function showGenres(){
 }
 showGenres();
 
+
+let currentSongId= 0;
+let index = 0;
+
+
 function showSongs(){
     currentGenreSongs = [];
     songsData.forEach((e)=>{
@@ -126,6 +131,7 @@ function showSongs(){
 }
 showSongs();
 console.log(currentGenreSongs);
+
 
 
 genreList.addEventListener('change', ()=>{
@@ -149,19 +155,20 @@ genreList.addEventListener('change', ()=>{
 })
 
 
+
 songLists.addEventListener('click' , (event)=>{
-        imageEl.textContent = '';
-        singer.textContent = '';
-        song.textContent = '';
         if(event.target.classList.contains('songNames')){
             const currId = event.target.dataset.id;
+            currentSongId = currId;
             const currObj = songsData.find((e)=> e.id === Number(currId));
             renderCurrentSong(currObj);
-            currentSongInfo(currObj);
         }
 })
 
 function renderCurrentSong(object){
+        imageEl.textContent = '';
+        singer.textContent = '';
+        song.textContent = '';
         const tempImg = document.createElement('img');
         tempImg.src = object.img;
         imageEl.appendChild(tempImg);
@@ -175,11 +182,26 @@ function renderCurrentSong(object){
         audioBlock.play();
 }
 
+nextBtn.addEventListener('click', ()=>{
+    index = songsData.findIndex(curr => curr.id == currentSongId);
+    if(index < songsData.length-1){
+        renderCurrentSong(songsData[index+1]);
+        currentSongId = songsData[index+1].id;
+    }
+})
 
-function addToPlaylist(){
-
-}
-
+prevBtn.addEventListener('click', ()=>{
+    index = songsData.findIndex(curr => curr.id == currentSongId);
+    if(index <= songsData.length - 1){
+        if(!index == 0){
+            renderCurrentSong(songsData[index-1]);
+            currentSongId = songsData[index-1].id;
+        }else{
+            return
+        }
+        
+    }
+})
 
 
 imageEl.addEventListener('click', ()=>{

@@ -145,6 +145,16 @@ h1{
     /* width: 5rem;
     height: 2rem; */
     padding: 0.8rem 1.5rem;
+    transition: all 0.2s ease-in-out;
+}
+
+.controlBtn:hover{
+    background-color: rgb(226, 226, 226);
+}
+
+.controlBtn:active{
+    transition: 0.1s ;
+    background-color: rgb(204, 204, 204);
 }
 
 
