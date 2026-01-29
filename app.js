@@ -57,7 +57,7 @@ const currentPlaylistDiv = document.getElementById('currentPlaylistDiv');
 const allPlay = document.getElementById('allPlaylist');
 
 const playlistNameInput = document.getElementById('playlist');
-const createPlaylist = document.getElementById('createPlaylist')
+const createPlaylists = document.getElementById('createPlaylist')
 
 const buttons = document.getElementsByClassName('controlBtn');
 const ctrlBtn = [...buttons];
@@ -239,21 +239,6 @@ addBtn.addEventListener('click', ()=>{
 
 let currentSongs = [];
 
-// function addToPlaylist(){
-//     const selectedSong = songsData.find(curr => curr.id == currentSongId);
-
-
-//     if(!currentSongs.find((e)=> e.name == selectedSong.name)){
-//         currentSongs.push(selectedSong);
-
-//         const songList = document.createElement("div")
-//         songList.classList.add('songNamesList');
-//         songList.textContent =  selectedSong.name;
-//         songList.dataset.id = selectedSong.id;
-//         currentPlay.appendChild(songList);
-//     }
-// }
-
 function addToPlaylist(){
     const selectedSong = songsData.find(curr => curr.id == currentSongId);
 
@@ -270,9 +255,14 @@ function addToPlaylist(){
 }
 
 
-let allPlaylists = [];
+createPlaylists.addEventListener('click', ()=>{
+    createPlaylist();
+})
 
-createPlaylist.addEventListener('click', ()=>{
+let allPlaylists = [];
+let idNum = 0
+
+function createPlaylist(){
     if(playlistNameInput.value){
 
         if(currentSongs.length == 0){
@@ -281,18 +271,53 @@ createPlaylist.addEventListener('click', ()=>{
             let playlistObj = {};
             playlistObj.name = playlistNameInput.value;
             playlistObj.songs = currentSongs;
-
-            const playlistName = document.createElement("div");
-            playlistName.classList.add('songNamesList');
-            playlistName.textContent = playlistObj.name;
-            allPlay.appendChild(playlistName);
-            currentPlay.textContent = '';
-            playlistNameInput.value = '';
+            playlistObj.id = idNum;
+            renderPlaylistSong(playlistObj);
+            allPlaylists.push(playlistObj);
+            idNum++;
         }
 
     }else{
         alert('Enter a playlist name first');
     }
+}
 
-    
+function renderPlaylistSong(obj){
+        const playlistName = document.createElement("div");
+        playlistName.classList.add('songNamesList');
+        playlistName.textContent = obj.name;
+        playlistName.dataset.id = obj.id;
+        allPlay.appendChild(playlistName);
+        currentPlay.textContent = '';
+        playlistNameInput.value = '';
+}
+
+
+allPlay.addEventListener('click',(event)=>{
+    if(event.target.classList.contains('songNamesList')){
+        // const selectedSong = songsData.find(curr => curr.id == currentSongId);
+        const id = event.target.dataset.id;
+        const play = allPlaylists.find(e => e.id == Number(id));
+        
+        renderCurrentPlaylist(play);
+
+        
+
+    }
 })
+
+
+function renderCurrentPlaylist(obj){
+    let object = obj.songs;
+    currentPlay.textContent = '';
+    object.forEach((e)=>{
+        const songList = document.createElement("div");
+        songList.classList.add('songNamesList');
+        songList.textContent =  e.name;
+        songList.dataset.id = e.id;
+        currentPlay.appendChild(songList);
+    })
+    
+
+
+}
