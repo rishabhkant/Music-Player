@@ -217,9 +217,18 @@ h1{
 .songNamesList:hover{
     background-color: rgba(255, 255, 255, 0.226);
     scale: 101%;
+    cursor: pointer;
 }
 
+#currentPlaylistDiv{
+    display: flex;
+    align-items: center;
+    /* justify-content: center; */
+}
 
+#currentPlaylistDiv h3{
+    margin-right: 1rem;
+}
 
 
 #toggleBtn{
