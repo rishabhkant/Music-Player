@@ -252,10 +252,10 @@ function addToPlaylist(){
         songList.textContent =  selectedSong.name;
         songList.dataset.id = selectedSong.id;
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('deleteBtn');
-        deleteBtn.textContent = 'x';
-        songList.appendChild(deleteBtn);
+        // const deleteBtn = document.createElement('button');
+        // deleteBtn.classList.add('deleteBtn');
+        // deleteBtn.textContent = 'x';
+        // songList.appendChild(deleteBtn);
 
         currentPlay.appendChild(songList);
     }
@@ -295,10 +295,10 @@ function renderPlaylistSong(obj){
         playlistName.textContent = obj.name;
         playlistName.dataset.id = obj.id;
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('deleteBtn');
-        deleteBtn.textContent = 'x';
-        playlistName.appendChild(deleteBtn);
+        // const deleteBtn = document.createElement('button');
+        // deleteBtn.classList.add('deleteBtn');
+        // deleteBtn.textContent = 'x';
+        // playlistName.appendChild(deleteBtn);
 
 
         allPlay.appendChild(playlistName);
@@ -326,10 +326,10 @@ function renderCurrentPlaylist(obj){
         songList.textContent =  e.name;
         songList.dataset.id = e.id;
 
-        const deleteBtn = document.createElement('button');
-        deleteBtn.classList.add('deleteBtn');
-        deleteBtn.textContent = 'x';
-        songList.appendChild(deleteBtn);
+        // const deleteBtn = document.createElement('button');
+        // deleteBtn.classList.add('deleteBtn');
+        // deleteBtn.textContent = 'x';
+        // songList.appendChild(deleteBtn);
 
         currentPlay.appendChild(songList);
     })
